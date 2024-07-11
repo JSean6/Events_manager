@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
-const EventForm = () => {
+const VendorsForm = () => {
   const [formData, setFormData] = useState({
-    image: null,
-    title: '',
-    category: '',
-    venue: '',
-    description: '',
-    startDate: '',
+    Comapany_name: '',
+    service: '',
+    working_hours: '',
+    availability: '',
     endDate: '',
     tickets: '',
     price_of_ticket: ''
@@ -28,7 +26,7 @@ const EventForm = () => {
       data.append(key, formData[key]);
     }
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/events/', {
+      const response = await fetch('http://127.0.0.1:8000/api/vendors/', {
         method: 'POST',
         body: data,
       });
@@ -36,12 +34,11 @@ const EventForm = () => {
         const event = await response.json();
         console.log('Event created:', event);
         setFormData({
-          image: null,
-          title: '',
-          category: '',
-          venue: '',
-          description: '',
-          startDate: '',
+          Comapany_name: '',
+          service: '',
+          rates: '',
+          working_hours: '',
+          availability: '',
           endDate: '',
           tickets: '',
           price_of_ticket: ''
@@ -59,99 +56,68 @@ const EventForm = () => {
       onSubmit={handleSubmit}
       className="max-w-lg mx-auto p-8 border border-gray-200 rounded-lg bg-white px-10"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center">Add Event</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">Vendor Registration</h2>
       <div className="mb-4">
-        <label className="block text-gray-700">Image</label>
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange}
-          required
-          className="w-full p-2 border border-gray-300 rounded mt-1 "
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Title</label>
+        <label className="block text-gray-700">Company Name</label>
         <input
           type="text"
-          name="title"
-          value={formData.title}
+          name="Comapany_name"
+          value={formData.Comapany_name}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Category</label>
+        <label className="block text-gray-700">Service</label>
         <input
           type="text"
-          name="category"
-          value={formData.category}
+          name="service"
+          value={formData.service}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Venue</label>
+        <label className="block text-gray-700">Your Rates</label>
         <input
           type="text"
-          name="venue"
-          value={formData.venue}
+          name="rates"
+          value={formData.rates}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Description</label>
+        <label className="block text-gray-700">working_hours</label>
         <textarea
-          name="description"
-          value={formData.description}
+          type="text"
+          name="working_hours"
+          value={formData.working_hours}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Start Date</label>
-        <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border border-gray-300 rounded mt-1"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">End Date</label>
-        <input
-          type="date"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border border-gray-300 rounded mt-1"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Number of Tickets</label>
+        <label className="block text-gray-700">Contact</label>
         <input
           type="number"
-          name="tickets"
-          value={formData.tickets}
+          name="contact"
+          value={formData.contact}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Ticket price</label>
+        <label className="block text-gray-700">Availability Status</label>
         <input
-          type="number"
-          name="price_of_ticket"
-          value={formData.price_of_ticket}
+          type="text"
+          name="availability"
+          value={formData.availability}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"
@@ -161,10 +127,10 @@ const EventForm = () => {
         type="submit"
         className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
       >
-        Add Event
+        Register
       </button>
     </form>
   );
 };
 
-export default EventForm;
+export default VendorsForm;

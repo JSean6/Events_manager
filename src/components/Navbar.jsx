@@ -1,53 +1,71 @@
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { MdTravelExplore } from "react-icons/md";
-// import logo from '/src/assets/logo.png';
+import logo from '/src/assets/logo.png'; // Make sure the logo path is correct
+import './Styles.css'; // Import the styles
 
 const Navbar = () => {
-    const navbarHeight = '96px'; // Adjust this value to match your navbar's height
+  const [isOpen, setIsOpen] = useState(false);
 
-    const styles = {
-        img: {
-            height: navbarHeight,
-            width: '124px', // Set the image height to match the navbar height
-            marginRight: '20px', // Add margin if needed to separate from other elements
-            objectFit: 'cover', // Ensure the image covers the container
-        },
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
-    };
-
-    return (
-        <>
-            <nav className='bg-blue-950 py-2' > 
-                <div className='container mx-auto flex justify-between items-center mt-1 mb-1 '>
-                    {/* <Link to="/" className='text-blue-500 font-bold text-2xl'>
-                        <img src={logo} alt="SavannahSunsetTours" style={styles.img} />
-                    </Link> */}
-                    <ul className="flex justify-center space-x-6">
-                        <li>
-                            <Link to="" className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition duration-300 ease-in-out font-bold px-4 py-2 rounded text-white'>
-                                Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/about" className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition duration-300 ease-in-out font-bold px-4 py-2 rounded text-white'>
-                                About
-                            </Link> 
-                        </li>
-                        <li>
-                            <Link to="events" className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition duration-300 ease-in-out font-bold px-4 py-2 rounded text-white'>
-                                Create Events
-                            </Link> 
-                        </li>
-                        <li>
-                            <Link to="eventlist" className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition duration-300 ease-in-out font-bold px-4 py-2 rounded text-white'>
-                                Events
-                            </Link> 
-                        </li>
-                    </ul>             
-                </div>
-            </nav>
-        </>
-    );
+  return (
+    <>
+      <nav className="navbar">
+        <Link to="/" className='flex items-center'>
+          <img src={logo} alt="Logo" />
+        </Link>
+        <div className="hamburger" onClick={handleToggle}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
+          <li>
+            <Link to="" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="events" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Create Events
+            </Link>
+          </li>
+          <li>
+            <Link to="eventlist" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Events
+            </Link>
+          </li>
+          <li>
+            <Link to="eventsavailable" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Check Availability
+            </Link>
+          </li>
+          <li>
+            <Link to="ticketsales" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Ticket Sales
+            </Link>
+          </li>
+          <li>
+            <Link to="vendorsform" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Vendor Registration
+            </Link>
+          </li>
+          <li>
+            <Link to="vendors" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Vendor List
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </>
+  );
 }
 
 export default Navbar;

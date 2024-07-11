@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+const handleLogin = async () => {
+  try {
+      const response = await client.post('/login/', { email, password });
+      setMessage('Login successful!');
+      // Redirect to About page on successful login
+      navigate('/About');
+  } catch (error) {
+      setMessage('Login failed. Please check your credentials.');
+  }
+};
+
+
+
+
+
 const LoginForm = () => {
   const location = useLocation();
   const [formData, setFormData] = useState({

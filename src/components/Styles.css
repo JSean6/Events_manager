@@ -1,0 +1,188 @@
+/* Import the Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #F87060; /* Dark background color for the body */
+  color: rgba(28, 48, 103, 0.8); /* White text color */
+}
+
+.event-card {
+  font-family: 'Roboto', sans-serif;
+}
+
+.text-center {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(28, 48, 103, 0.8); 
+  backdrop-filter: blur(8px); /* Blur effect */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.navbar img {
+  height: 96px;
+  width: 160px;
+  margin-right: 20px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.navbar a {
+  color: #fff; /* White text color for links */
+  padding: 15px 20px;
+  display: inline-block;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar a::before,
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #B3A394; /* Blue color for the line */
+  transition: width 0.3s ease;
+}
+
+.navbar a::before {
+  top: 0;
+  left: 0;
+}
+
+.navbar a::after {
+  bottom: 0;
+  right: 0;
+}
+
+.navbar a:hover::before,
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* Event card adjustments */
+.event-card {
+  background-color: #B3A394; /* Darker background for cards */
+  color: #fff;
+  border: 1px solid #444; /* Border color */
+}
+
+.event-card img {
+  opacity: 1.2; /* Slightly translucent images */
+}
+
+.event-card img:hover {
+  opacity: 1; /* Full opacity on hover */
+}
+
+.event-card button {
+  background-color: #007BFF; /* Button color matching the theme */
+  color: #fff;
+}
+
+.event-card button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Navbar */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 2px;
+  background-color: white;
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+@media (max-width: 768px) {
+  .navbar img {
+    height: 60px; /* Adjust logo size */
+    width: 100px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(28, 48, 103, 0.9);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* styles.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  
