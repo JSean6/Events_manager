@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import EventForm from './Eventform';
-import EventCalendar from '../components/Calendar';
 
 const Eventpage = () => {
   const [events, setEvents] = useState([]);
@@ -33,7 +32,6 @@ const Eventpage = () => {
       <h1 className="text-3xl font-semibold mb-8 text-center">Event Manager</h1>
       <EventForm onAddEvent={handleAddEvent} />
       
-      <EventCalendar events={events} />
     </div>
     </section>
   );

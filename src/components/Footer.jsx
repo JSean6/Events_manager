@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook, FaTwitter, FaPinterest, FaEnvelope, FaLinkedin } from 'react-icons/fa';
-import logoPlaceholder from '/src/assets/logo.png'; // Replace with your actual logo path
+import logoPlaceholder from '/src/assets/footerlogo.png'; // Replace with your actual logo path
 
 const Footer = () => {
   const styles = {

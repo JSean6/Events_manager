@@ -52,8 +52,8 @@ class FetchedEventsWithIncome extends React.Component {
     const { error, isLoaded, events } = this.state;
     const navigate = this.props.navigate;
 
-    const handleMoreInfo = (title, category, venue, duration) => {
-      navigate("/ticketform", { state: { title, category, venue, duration } });
+    const handleMoreInfo = (title, category, venue, duration, price_of_ticket) => {
+      navigate("/ticketform", { state: { title, category, venue, duration, price_of_ticket} });
     };
 
     if (error) {
@@ -85,8 +85,9 @@ class FetchedEventsWithIncome extends React.Component {
                     <p className="mb-1"><span className="font-semibold">Tickets Available:</span> {this.getAvailableTicketsForEvent(event)}</p>
                     <p className="mb-1"><span className="font-semibold">Tickets Sales:</span> {this.getTicketSalesForEvent(event)} Ksh</p>
                     <button
-                      onClick={() => handleMoreInfo(event.title, event.category, event.venue, `From: ${event.startDate} To: ${event.endDate}`)}
-                      className="mt-4 px-4 py-2 rounded-lg hover:bg-blue-700"
+                      onClick={() => handleMoreInfo(event.title, event.category, event.venue, `From: ${event.startDate} To: ${event.endDate}`, event.price_of_ticket)}
+                      className="mt-4 px-4 py-2 rounded-lg"
+                      id='btn'
                     >
                       GET A TICKET
                     </button>

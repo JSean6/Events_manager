@@ -43,6 +43,7 @@ const LoginForm = () => {
       action="http://127.0.0.1:8000/api/login/"
       method="POST" 
       className="max-w-lg mx-auto p-10 border border-gray-200 rounded-lg bg-white py-18 px-100"
+      id = 'loginform'
     >
       <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
       <div className="mb-4">
@@ -70,6 +71,7 @@ const LoginForm = () => {
       <button 
         type="submit" 
         className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
+        id='btn'
       >
         Login
       </button>

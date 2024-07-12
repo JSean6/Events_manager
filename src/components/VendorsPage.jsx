@@ -54,6 +54,7 @@ class FetchVendors extends React.Component {
               <p className="mt-2 text-gray-600">Contact: {vendor.contact}</p>
               <button 
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                id='btn'
               >
                 BOOK VENDOR
               </button>

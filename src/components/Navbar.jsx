@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import logo from '/src/assets/logo.png'; // Make sure the logo path is correct
-import './Styles.css'; // Import the styles
+import { Link } from 'react-router-dom';
+import logo from '/src/assets/logo.png';
+import './Styles.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,39 +28,63 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/about" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+            <Link to="about" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
               About
             </Link>
           </li>
           <li>
-            <Link to="events" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-              Create Events
+            <Link to="contact" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+              Contact Us
             </Link>
           </li>
-          <li>
-            <Link to="eventlist" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+          <li className="relative dropdown">
+            <Link to="events" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
               Events
             </Link>
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="events" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Create Events
+                </Link>
+              </li>
+              <li>
+                <Link to="eventlist" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link to="eventsavailable" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Check Availability
+                </Link>
+              </li>
+              <li>
+                <Link to="ticketsales" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Ticket Sales
+                </Link>
+              </li>
+            </ul>
           </li>
-          <li>
-            <Link to="eventsavailable" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-              Check Availability
-            </Link>
-          </li>
-          <li>
-            <Link to="ticketsales" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-              Ticket Sales
-            </Link>
-          </li>
-          <li>
-            <Link to="vendorsform" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-              Vendor Registration
-            </Link>
-          </li>
-          <li>
+          <li className="relative dropdown">
             <Link to="vendors" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-              Vendor List
+              Vendors
             </Link>
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="vendorsform" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Vendor Registration
+                </Link>
+              </li>
+              <li>
+                <Link to="vendors" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Vendor List
+                </Link>
+              </li>
+              <li>
+                <Link to="vendors/booking" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+                  Book Vendor
+                </Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>

@@ -15,6 +15,8 @@ import AdminDashboard from "./components/Dashboard";
 import UserTable from "./components/Userstable";
 import EventTable from "./components/EventsTable";
 import VendorTable from "./components/Vendorstable";
+import ContactForm from "./components/ContactForm";
+import VendorBookingForm from "./components/VendorBookingPage";
 
 const App = () => {
   return (
@@ -30,11 +32,13 @@ const App = () => {
     <Route path="/eventsavailable" element={<FetchedEventsWithTickets />}/>
     <Route path="/ticketsales" element={<FetchedEventsWithIncome />}/>
     <Route path="/vendorsform" element={<VendorsForm />}/>
+    <Route path="/vendors/booking" element={<VendorBookingForm />}/>
     <Route path="/vendors" element={<FetchVendors />}/>
     <Route path="/dashboard" element={<AdminDashboard />}/>
     <Route path="/dashboard/users" element={<UserTable />}/>
     <Route path="/dashboard/events" element={<EventTable />}/>
     <Route path="/dashboard/vendors" element={<VendorTable />}/>
+    <Route path="/contact" element={<ContactForm />}/>
     </Routes>
     <Footer />
     </Router>

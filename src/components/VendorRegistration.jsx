@@ -91,7 +91,7 @@ const VendorsForm = () => {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">working_hours</label>
+        <label className="block text-gray-700">Your working hours</label>
         <textarea
           type="text"
           name="working_hours"
@@ -126,6 +126,7 @@ const VendorsForm = () => {
       <button
         type="submit"
         className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
+        id='btn'
       >
         Register
       </button>

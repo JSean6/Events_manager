@@ -216,7 +216,7 @@ const TicketForm = () => {
             className="w-full px-3 py-2 border rounded-lg" 
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg">Submit</button>
+        <button type="submit" id='btn' className="w-full bg-blue-500 text-white py-2 rounded-lg">Submit</button>
       </form>
       {receipt && (
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md mb-10">

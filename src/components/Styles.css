@@ -3,8 +3,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #F87060; /* Dark background color for the body */
-  color: rgba(28, 48, 103, 0.8); /* White text color */
+  background-color: #F87060; 
+  color: rgba(28, 48, 103, 0.8); 
 }
 
 .event-card {
@@ -19,19 +19,18 @@ body {
 .navbar {
   position: sticky;
   top: 0;
-  width: 100%;
   background-color: rgba(28, 48, 103, 0.8); 
   backdrop-filter: blur(8px); /* Blur effect */
   z-index: 1000;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
 }
 
 .navbar img {
-  height: 96px;
-  width: 160px;
+  height: 84px;
+  width: 130px;
   margin-right: 20px;
   object-fit: cover;
   transition: all 0.3s ease;
@@ -44,6 +43,12 @@ body {
   font-weight: bold;
   position: relative;
   transition: color 0.3s ease;
+  text-decoration: none; /* Remove underline */
+}
+
+/* Remove underline for the logo */
+.navbar .flex.items-center a {
+  text-decoration: none;
 }
 
 .navbar a::before,
@@ -51,8 +56,8 @@ body {
   content: '';
   position: absolute;
   width: 0;
-  height: 2px;
-  background-color: #B3A394; /* Blue color for the line */
+  height: 4px;
+  background-color: #B3A394;
   transition: width 0.3s ease;
 }
 
@@ -71,15 +76,37 @@ body {
   width: 100%;
 }
 
-/* Event card adjustments */
+/* Dropdown styles */
+.dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(28, 48, 103, 0.8);
+  backdrop-filter: blur(8px); /* Blur effect */
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  width: 100%;
+}
+
+.dropdown-menu li a {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+}
+
 .event-card {
   background-color: #B3A394; /* Darker background for cards */
   color: #fff;
   border: 1px solid #444; /* Border color */
-}
-
-.event-card img {
-  opacity: 1.2; /* Slightly translucent images */
 }
 
 .event-card img:hover {
@@ -146,43 +173,59 @@ body {
   .hamburger {
     display: flex;
   }
+
+  .dropdown:hover .dropdown-menu {
+    display: none;
+  }
 }
 
-/* styles.css */
+/* Grid layout for event cards */
+.grid {
+  display: grid;
+  gap: 8px;
+}
 
-body {
-    font-family: 'Roboto', sans-serif;
+@media (min-width: 320px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  #loginform {
+    margin-right: 20px;
+    margin-left: 20px;
   }
-  
-  th {
-    background-color: #f4f4f4;
+}
+@media (max-width: 768px) {
+  #contactform {
+    margin-right: 20px;
+    margin-left: 20px;
   }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .overflow-x-auto {
-    overflow-x: auto;
-  }
-  
+}
+
+#btn {
+  background-color: #102542; 
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+#btn:hover {
+  background-color: #12386a;
+}

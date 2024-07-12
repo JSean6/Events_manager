@@ -1,72 +1,91 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-class FetchedEvents extends React.Component {
+class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      events: []
+      events: [],
+      tickets: []
     };
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/events/")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            events: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+    Promise.all([
+      fetch("http://127.0.0.1:8000/api/events/").then(res => res.json()),
+      fetch("http://127.0.0.1:8000/api/tickets/").then(res => res.json())
+    ]).then(
+      ([events, tickets]) => {
+        this.setState({
+          isLoaded: true,
+          events,
+          tickets
+        });
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    );
+  }
+  
+  getTicketsCountForEvent(eventId) {
+    const { tickets } = this.state;
+    return tickets.filter(ticket => ticket.title === eventId).reduce((count, ticket) => count + ticket.number_of_tickets, 0);
+  }
+
+  getAvailableTicketsForEvent(event) {
+    const bookedTickets = this.getTicketsCountForEvent(event.title);
+    return event.tickets - bookedTickets;
   }
 
   render() {
     const { error, isLoaded, events } = this.state;
     const navigate = this.props.navigate;
-    
-    
-    const handleMoreInfo = (title, category, venue, duration, tickets, price_of_ticket) => {
-      navigate("/ticketform", { state: { title, category, venue, duration, tickets, price_of_ticket} });
+
+    const handleMoreInfo = (title, category, venue, duration, price_of_ticket) => {
+      navigate("/ticketform", { state: { title, category, venue, duration, price_of_ticket} });
     };
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div className="text-center text-red-600 mt-4">Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div className="text-center text-gray-700 mt-4">Loading...</div>;
     } else {
       const baseURL = "https://res.cloudinary.com/da1fegzlm/";
       return (
-        <div className="max-w-lg mx-auto mt-10">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Event List</h2>
-          {events.map(event => (
-            <div key={event.id} className="p-4 border border-gray-500 rounded-lg mb-4 bg-white">
-              <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-auto mb-4" />
-              <h3 className="text-xl mt-2 text-gray-700 font-semibold">{event.title}</h3>
-              <h3 className="mt-2 text-gray-700">Category: {event.category}</h3>
-              <h3 className="mt-2 text-gray-700">Venue: {event.venue}</h3>
-              <p className="mt-2 text-gray-700">Description: {event.description}</p>
-              <p className="mt-2 text-gray-600">Start Date: {event.startDate}</p>
-              <p className="mt-2 text-gray-600">End Date: {event.endDate}</p>
-              <p className="mt-2 text-gray-600">Tickets: {event.tickets}</p>
-              <p className="mt-2 text-gray-600">Ticket Price: {event.price_of_ticket}</p>
-              <button 
-                onClick={() => handleMoreInfo(event.title, event.category, event.venue ,`From: ${event.startDate} To: ${event.endDate}`,  event.price_of_ticket)} 
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-              >
-                GET A TICKET
-              </button>
-            </div>
-          ))}
+        <div className="max-w-6xl mx-auto mt-10">
+          <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Event List</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20 mx-20">
+            {events.map(event => (
+              <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
+                <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">{event.title}</h3>
+                  <p className="text-gray-600 mb-4">{event.description}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Category:</span> {event.category}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Venue:</span> {event.venue}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Start Date:</span> {event.startDate}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">End Date:</span> {event.endDate}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Total Tickets:</span> {event.tickets}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Ticket Price:</span> {event.price_of_ticket}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Booked:</span> {this.getTicketsCountForEvent(event.title)}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Available:</span> {this.getAvailableTicketsForEvent(event)}</p>
+                  <button
+                    onClick={() => handleMoreInfo(event.title, event.category, event.venue,  `From: ${event.startDate} To: ${event.endDate}`, event.price_of_ticket)}
+                    className="mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+                    id='btn'
+                  >
+                    GET A TICKET
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       );
     }
@@ -80,4 +99,4 @@ function withNavigate(Component) {
   };
 }
 
-export default withNavigate(FetchedEvents);
+export default withNavigate(FetchedEventsWithTickets);
