@@ -9,6 +9,8 @@ const EventForm = () => {
     description: '',
     startDate: '',
     endDate: '',
+    duration: '',
+    time: '',
     tickets: '',
     price_of_ticket: ''
   });
@@ -43,6 +45,8 @@ const EventForm = () => {
           description: '',
           startDate: '',
           endDate: '',
+          duration: '',
+          time: '',
           tickets: '',
           price_of_ticket: ''
         });
@@ -130,6 +134,28 @@ const EventForm = () => {
           type="date"
           name="endDate"
           value={formData.endDate}
+          onChange={handleChange}
+          required
+          className="w-full p-2 border border-gray-300 rounded mt-1"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Duration</label>
+        <input
+          type="text"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+          required
+          className="w-full p-2 border border-gray-300 rounded mt-1"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Time</label>
+        <input
+          type="text"
+          name="time"
+          value={formData.time}
           onChange={handleChange}
           required
           className="w-full p-2 border border-gray-300 rounded mt-1"

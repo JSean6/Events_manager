@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebook, FaTwitter, FaPinterest, FaEnvelope, FaLinkedin } from 'react-icons/fa';
-import logoPlaceholder from '/src/assets/footerlogo.png'; // Replace with your actual logo path
+import logoPlaceholder from '/src/assets/logo.png'; 
 
 const Footer = () => {
   const styles = {
     footer: {
-      backgroundColor: '#E5E4E2', // Platinum color background
-      color: '#000',
+      backgroundColor: 'rgba(28, 48, 103, 0.8)', // Platinum color background
+      color: '#fff',
       padding: '40px 20px',
       display: 'flex',
       justifyContent: 'space-between',
@@ -33,7 +33,7 @@ const Footer = () => {
       width: '100%',
       padding: '10px',
       margin: '10px 0',
-      backgroundColor: '#333',
+      backgroundColor: '#fff',
       color: '#fff',
       border: 'none',
     },
@@ -45,13 +45,13 @@ const Footer = () => {
     subscribeButton: {
       width: '100%',
       padding: '10px',
-      backgroundColor: '#333',
+      backgroundColor: '#fff',
       color: '#fff',
       border: 'none',
       cursor: 'pointer',
     },
     link: {
-      color: '#000',
+      color: '#fff',
       textDecoration: 'none',
       marginBottom: '10px',
       display: 'block',
@@ -63,12 +63,12 @@ const Footer = () => {
       <div style={styles.section}>
         <img src={logoPlaceholder} alt="Logo" style={styles.logo} />
         <div style={styles.socialIcons}>
-          <a href="#" style={{ color: '#000' }}><FaInstagram size={24} /></a>
-          <a href="#" style={{ color: '#000' }}><FaFacebook size={24} /></a>
-          <a href="#" style={{ color: '#000' }}><FaTwitter size={24} /></a>
-          <a href="#" style={{ color: '#000' }}><FaPinterest size={24} /></a>
-          <a href="#" style={{ color: '#000' }}><FaEnvelope size={24} /></a>
-          <a href="#" style={{ color: '#000' }}><FaLinkedin size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaInstagram size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaFacebook size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaTwitter size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaPinterest size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaEnvelope size={24} /></a>
+          <a href="#" style={{ color: '#fff' }}><FaLinkedin size={24} /></a>
         </div>
       </div>
       <div style={styles.section}>

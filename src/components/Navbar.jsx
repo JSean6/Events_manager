@@ -94,13 +94,13 @@ const Navbar = () => {
         </li>
         {auth ? (
           <li>
-            <button onClick={logout} className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600'>
+            <button onClick={logout} className=''>
               Logout
             </button>
           </li>
         ) : (
           <li>
-            <Link to="/login" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600'>
+            <Link to="/login" className=''>
               Login
             </Link>
           </li>

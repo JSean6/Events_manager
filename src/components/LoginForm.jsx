@@ -59,7 +59,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-10 border border-gray-200 rounded-lg bg-white py-18 px-100"
+      className="max-w-lg mx-auto p-10 border border-gray-200 rounded-lg bg-white py-18 px-100 my-12"
     >
       <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
       {message && <p className="text-center text-red-500">{message}</p>}
