@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import EventCharts from './EventCharts';
 
 class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class FetchedEventsWithTickets extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, events } = this.state;
+    const { error, isLoaded, events, tickets } = this.state;
     const navigate = this.props.navigate;
 
     const handleMoreInfo = (title, category, venue, duration, price_of_ticket) => {
@@ -85,6 +86,7 @@ class FetchedEventsWithTickets extends React.Component {
               </div>
             ))}
           </div>
+          <EventCharts events={events} tickets={tickets} />
         </div>
       );
     }

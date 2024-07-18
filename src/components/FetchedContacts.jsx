@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 
-class UserTable extends Component {
+class ContactsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      customusers: []
+      contacts: []
     };
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/users/") 
+    fetch("http://127.0.0.1:8000/api/contacts/")
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            users: result
+            contacts: result
           });
         },
         (error) => {
@@ -30,7 +30,7 @@ class UserTable extends Component {
   }
 
   render() {
-    const { error, isLoaded, customusers } = this.state;
+    const { error, isLoaded, contacts } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -39,21 +39,21 @@ class UserTable extends Component {
     } else {
       return (
         <div className="overflow-x-auto">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Users</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-center">Contacts</h2>
           <table className="min-w-full bg-white border">
             <thead>
               <tr>
-                <th className="px-4 py-2 border">Username</th>
+                <th className="px-4 py-2 border">Name</th>
                 <th className="px-4 py-2 border">Email</th>
-                <th className="px-4 py-2 border">Full Name</th>
+                <th className="px-4 py-2 border">Message</th>
               </tr>
             </thead>
             <tbody>
-              {customusers.map(user => (
-                <tr key={user.id}>
-                  <td className="px-4 py-2 border">{customuser.username}</td>
-                  <td className="px-4 py-2 border">{user.email}</td>
-                  {/* <td className="px-4 py-2 border">{user.full_name}</td> */}
+              {contacts.map(contact => (
+                <tr key={contact.id}>
+                  <td className="px-4 py-2 border">{contact.name}</td>
+                  <td className="px-4 py-2 border">{contact.email}</td>
+                  <td className="px-4 py-2 border">{contact.message}</td>
                 </tr>
               ))}
             </tbody>
@@ -64,4 +64,4 @@ class UserTable extends Component {
   }
 }
 
-export default UserTable;
+export default ContactsTable;

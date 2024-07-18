@@ -17,20 +17,72 @@ import EventTable from "./components/EventsTable";
 import VendorTable from "./components/Vendorstable";
 import ContactForm from "./components/ContactForm";
 import VendorBookingForm from "./components/VendorBookingPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./components/context/AuthContext";
+import EventCharts from "./components/EventCharts";
+
 
 const App = () => {
   return (
+    <AuthProvider>
     <Router>
     <Navbar />
     <Routes>
+    <Route 
+          path="/eventtickets" 
+          element={
+            <ProtectedRoute>
+              <FetchedEventsWithTickets />
+            </ProtectedRoute>
+          } 
+    />
+    <Route 
+          path="/eventsavailable" 
+          element={
+            <ProtectedRoute>
+              <FetchedEventsWithTickets />
+            </ProtectedRoute>
+          } 
+    />
+    <Route 
+          path="/ticketsales" 
+          element={
+            <ProtectedRoute>
+              <FetchedEventsWithIncome />
+            </ProtectedRoute>
+          } 
+    />
+    <Route 
+          path="/ticketform" 
+          element={
+            <ProtectedRoute>
+              <TicketForm />
+            </ProtectedRoute>
+          } 
+    />
+    <Route 
+          path="/eventcharts" 
+          element={
+            <ProtectedRoute>
+              <EventCharts />
+            </ProtectedRoute>
+          } 
+    />
+    <Route 
+          path="/events" 
+          element={
+            <ProtectedRoute>
+              <Eventpage />
+            </ProtectedRoute>
+          } 
+    />
     <Route path="" element={<Home />} />
     <Route path="/register" element={<RegisterForm />}/>
+    {/* <Route path="/events" element={<Eventpage />}/> */}
+    {/* <Route path="/ticketform" element={<TicketForm />}/> */}
+    {/* <Route path="/eventsavailable" element={<FetchedEventsWithTickets />}/> */}
     <Route path="/login" element={<LoginForm />}/>
-    <Route path="/events" element={<Eventpage />}/>
-    <Route path="/eventlist" element={<FetchedEvents />}/>
-    <Route path="/ticketform" element={<TicketForm />}/>
-    <Route path="/eventsavailable" element={<FetchedEventsWithTickets />}/>
-    <Route path="/ticketsales" element={<FetchedEventsWithIncome />}/>
+    {/* <Route path="/ticketsales" element={<FetchedEventsWithIncome />}/> */}
     <Route path="/vendorsform" element={<VendorsForm />}/>
     <Route path="/vendors/booking" element={<VendorBookingForm />}/>
     <Route path="/vendors" element={<FetchVendors />}/>
@@ -42,6 +94,7 @@ const App = () => {
     </Routes>
     <Footer />
     </Router>
+    </AuthProvider>
   );
 };
 export default App;

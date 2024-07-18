@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState({
@@ -18,30 +17,14 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post('https://formspree.io/f/movavjaw', formState);
-      if (response.status === 200) {
-        setResponseMessage('Thank you! Your message has been sent.');
-        setFormState({
-          name: '',
-          email: '',
-          message: ''
-        });
-      } else {
-        setResponseMessage('Oops! There was a problem submitting your form.');
-      }
-    } catch (error) {
-      setResponseMessage('Oops! There was a problem submitting your form.');
-    }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg my-10">
-      <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg my-10" >
+      <h2 className="text-3xl font-semibold mb-6 text-center ">Contact Us</h2>
+      <form onSubmit={handleSubmit} action="post" className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-gray-700">Name</label>
+          <label htmlFor="name" className="block">Name</label>
           <input
             type="text"
             id="name"
@@ -53,7 +36,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-gray-700">Email</label>
+          <label htmlFor="email" className="block">Email</label>
           <input
             type="email"
             id="email"
@@ -65,7 +48,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="message" className="block text-gray-700">Message</label>
+          <label htmlFor="message" className="block">Message</label>
           <textarea
             id="message"
             name="message"
@@ -85,7 +68,7 @@ const ContactForm = () => {
         </button>
       </form>
       {responseMessage && (
-        <p className="mt-4 text-center text-gray-700">{responseMessage}</p>
+        <p className="mt-4 text-center">{responseMessage}</p>
       )}
     </div>
   );

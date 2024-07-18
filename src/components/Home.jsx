@@ -1,11 +1,10 @@
 import React from "react";
-import LoginForm from "./LoginForm";
-
+import FetchedEvents from "./FetchedEvents";
 function Home() {
     return (
         <>
         <br />
-            < LoginForm/>
+           <FetchedEvents />
         <br />
         </>
 

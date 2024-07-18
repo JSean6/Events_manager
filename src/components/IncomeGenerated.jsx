@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Styles.css'; // Make sure to import the CSS file
+import './Styles.css';
 
 class FetchedEventsWithIncome extends React.Component {
   constructor(props) {

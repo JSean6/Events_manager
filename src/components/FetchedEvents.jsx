@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './Styles.css'
 class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +59,7 @@ class FetchedEventsWithTickets extends React.Component {
       const baseURL = "https://res.cloudinary.com/da1fegzlm/";
       return (
         <div className="max-w-6xl mx-auto mt-10">
-          <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Event List</h2>
+          <h2 className="text-4xl font-semibold mb-10 text-center ">Event List</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20 mx-20">
             {events.map(event => (
               <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">

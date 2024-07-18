@@ -3,8 +3,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #F87060; 
-  color: rgba(28, 48, 103, 0.8); 
+  color: rgba(28, 48, 103, 0.8);
+  text-decoration-color: rgba(28, 48, 103, 0.8);;
 }
 
 .event-card {
@@ -228,4 +228,16 @@ body {
 
 #btn:hover {
   background-color: #12386a;
+}
+
+#loginform {
+  background-color: #F87060; 
+  color: #fff;
+  border: 1px solid #444; /* Border color */
+}
+
+#contactform {
+  background-color: #F87060; 
+  color: #fff;
+  border: 1px solid #444; /* Border color */
 }

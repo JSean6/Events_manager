@@ -2,6 +2,7 @@ import React from 'react';
 import EventTable from './EventsTable';
 import VendorTable from './Vendorstable';
 import UserTable from './Userstable';
+import ContactsTable from './FetchedContacts';
 
 const AdminDashboard = () => {
   return (
@@ -14,7 +15,10 @@ const AdminDashboard = () => {
         <VendorTable />
       </div>
       <div className="mb-8">
-        {/* <UserTable /> */}
+        <UserTable />
+      </div>
+      <div className="mb-8">
+         <ContactsTable />
       </div>
     </div>
   );
