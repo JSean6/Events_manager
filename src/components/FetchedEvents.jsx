@@ -63,7 +63,7 @@ class FetchedEventsWithTickets extends React.Component {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20 mx-20">
             {events.map(event => (
               <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
-                <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
+                <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" height="100px" />
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold text-gray-800 mb-2">{event.title}</h3>
                   <p className="text-gray-600 mb-4">{event.description}</p>

@@ -35,7 +35,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/contact" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-            Contact Us
+            Contact
           </Link>
         </li>
         <li className="relative dropdown">
@@ -93,7 +93,7 @@ const Navbar = () => {
           </ul>
         </li>
         {auth ? (
-          <li>
+          <li className='nav-links'>
             <button onClick={logout} className=''>
               Logout
             </button>

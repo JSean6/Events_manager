@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Styles.css'
+import './Styles.css';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    role: '',
+    role: 'user', // Autofill role with 'user'
   });
 
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const RegisterForm = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.OK) {
+      if (response.ok) { // Corrected response.OK to response.ok
         // If registration is successful, redirect to the login form
         navigate(`/login?email=${formData.email}`);
       } else {
@@ -89,6 +89,7 @@ const RegisterForm = () => {
           name="role"
           value={formData.role}
           onChange={handleChange}
+          readOnly 
           required
           className="w-full p-2 border border-gray-300 rounded mt-1 text-gray-700"
         />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidebar from './Sidebar';
 
 class ContactsTable extends Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class ContactsTable extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="overflow-x-auto">
+        <section className='dashboard-container'>
+        <Sidebar />
+        <div className="overflow-x-auto overflow-x-auto ml-100 dashboard-content mx-10 my-20">
           <h2 className="text-2xl font-semibold mb-6 text-center">Contacts</h2>
           <table className="min-w-full bg-white border">
             <thead>
@@ -59,6 +62,7 @@ class ContactsTable extends Component {
             </tbody>
           </table>
         </div>
+        </section>
       );
     }
   }

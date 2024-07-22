@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidebar from './Sidebar';
 
 class EventTable extends Component {
   constructor(props) {
@@ -38,8 +39,11 @@ class EventTable extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="overflow-x-auto">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Events</h2>
+        <section className='dashboard-container'>
+        <Sidebar />
+        <div className="overflow-x-auto ml-100 dashboard-content mx-10 my-20">
+          <h2 className="text-2xl font-semibold text-center">Events</h2>
+          <br />
           <table className="min-w-full bg-white border">
             <thead>
               <tr>
@@ -67,6 +71,7 @@ class EventTable extends Component {
             </tbody>
           </table>
         </div>
+        </section>
       );
     }
   }

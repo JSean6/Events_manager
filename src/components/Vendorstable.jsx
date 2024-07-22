@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidebar from './Sidebar';
 
 class VendorTable extends Component {
   constructor(props) {
@@ -38,7 +39,9 @@ class VendorTable extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="overflow-x-auto">
+        <section className='dashboard-container'>
+        <Sidebar />
+        <div className="overflow-x-auto ml-100 dashboard-content my-20 mx-10">
           <h2 className="text-2xl font-semibold mb-6 text-center">Vendors</h2>
           <table className="min-w-full bg-white border">
             <thead>
@@ -65,6 +68,7 @@ class VendorTable extends Component {
             </tbody>
           </table>
         </div>
+        </section>
       );
     }
   }

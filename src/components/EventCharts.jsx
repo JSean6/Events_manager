@@ -1,6 +1,7 @@
 import React from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 
+
 class EventCharts extends React.Component {
   getChartData() {
     const { events, tickets } = this.props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import EventCharts from './EventCharts';
+import { FaPerson } from "react-icons/fa6";
 
 class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class FetchedEventsWithTickets extends React.Component {
           <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Event List</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             {events.map(event => (
-              <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
+              <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white mx-20">
                 <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold text-gray-800 mb-2">{event.title}</h3>
@@ -74,7 +74,7 @@ class FetchedEventsWithTickets extends React.Component {
                   <p className="text-gray-700 mb-1"><span className="font-semibold">End Date:</span> {event.endDate}</p>
                   <p className="text-gray-700 mb-1"><span className="font-semibold">Total Tickets:</span> {event.tickets}</p>
                   <p className="text-gray-700 mb-1"><span className="font-semibold">Ticket Price:</span> {event.price_of_ticket}</p>
-                  <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Booked:</span> {this.getTicketsCountForEvent(event.title)}</p>
+                  <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Booked < FaPerson/>:</span> {this.getTicketsCountForEvent(event.title)}</p>
                   <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Available:</span> {this.getAvailableTicketsForEvent(event)}</p>
                   <button
                     onClick={() => handleMoreInfo(event.title, event.category, event.venue,  `From: ${event.startDate} To: ${event.endDate}`, event.price_of_ticket)}
@@ -86,7 +86,6 @@ class FetchedEventsWithTickets extends React.Component {
               </div>
             ))}
           </div>
-          <EventCharts events={events} tickets={tickets} />
         </div>
       );
     }
