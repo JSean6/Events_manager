@@ -31,7 +31,6 @@ const Eventpage = () => {
     <div className="p-8">
       <h1 className="text-3xl font-semibold mb-8 text-center">Event Manager</h1>
       <EventForm onAddEvent={handleAddEvent} />
-      
     </div>
     </section>
   );

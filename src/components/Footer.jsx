@@ -77,47 +77,21 @@ const Footer = () => {
           <li><Link to="/who-we-are" style={styles.link}>Who we are</Link></li>
           <li><Link to="/sustainable-practices" style={styles.link}>Sustainable practices</Link></li>
           <li><Link to="/design-ideology" style={styles.link}>Design Ideology</Link></li>
-          <li><Link to="/fabrics" style={styles.link}>Fabrics</Link></li>
-          <li><Link to="/circular-denim" style={styles.link}>Circular denim™</Link></li>
-          <li><Link to="/partners-and-factories" style={styles.link}>Partners and factories</Link></li>
-        </ul>
-      </div>
-      <div style={styles.section}>
-        <h3>Discover</h3>
-        <ul>
-          <li><Link to="/gift-cards" style={styles.link}>Gift Cards</Link></li>
-          <li><Link to="/rewards" style={styles.link}>Frank Rewards</Link></li>
-          <li><Link to="/give-get" style={styles.link}>Give $15, Get $15</Link></li>
-          <li><Link to="/affiliate" style={styles.link}>Affiliate</Link></li>
-          <li><Link to="/blog" style={styles.link}>Blog</Link></li>
-          <li><Link to="/careers" style={styles.link}>Work with us</Link></li>
-          <li><Link to="/stores" style={styles.link}>Our Stores</Link></li>
-        </ul>
-      </div>
-      <div style={styles.section}>
-        <h3>Customer Care</h3>
-        <ul>
-          <li><Link to="/shipping-information" style={styles.link}>Shipping Information</Link></li>
-          <li><Link to="/returns-exchanges" style={styles.link}>Returns & Exchanges</Link></li>
-          <li><Link to="/coupon-codes" style={styles.link}>Coupon Codes</Link></li>
-          <li><Link to="/faq" style={styles.link}>F.A.Q.</Link></li>
-          <li><Link to="/terms-conditions" style={styles.link}>Terms & Conditions</Link></li>
-          <li><Link to="/refund-policy" style={styles.link}>Refund Policy</Link></li>
-          <li><Link to="/privacy-policy" style={styles.link}>Privacy policy</Link></li>
-          <li><Link to="/accessibility" style={styles.link}>Accessibility</Link></li>
+          <li><Link to="/circular-denim" style={styles.link}>About Us™</Link></li>
+          <li><Link to="/partners-and-factories" style={styles.link}>Partners</Link></li>
         </ul>
       </div>
       <div style={styles.section}>
         <h3>Stay in touch</h3>
-        <p>Join our newsletter and stay in the know about new collections, outfit inspiration, sales, and more.</p>
+        <p>Join our newsletter</p>
         <input type="email" placeholder="Email" style={styles.formControl} />
         <input type="text" placeholder="First Name" style={styles.formControl} />
         <div style={styles.radioGroup}>
           <label>
-            <input type="radio" name="shopfor" value="women" /> Women
+            <input type="radio" name="shopfor" value="women" /> Manager
           </label>
           <label>
-            <input type="radio" name="shopfor" value="men" /> Men
+            <input type="radio" name="shopfor" value="men" /> Vendor
           </label>
           <label>
             <input type="radio" name="shopfor" value="all" /> All

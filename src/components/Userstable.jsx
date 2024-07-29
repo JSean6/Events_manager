@@ -55,6 +55,7 @@ class UserTable extends Component {
           <table className="min-w-full bg-white border">
             <thead>
               <tr>
+                <th className="px-4 py-2 border">Id</th>
                 <th className="px-4 py-2 border">Username</th>
                 {/* <th className="px-4 py-2 border">Date Joined</th> */}
                 <th className="px-4 py-2 border">Email</th>
@@ -65,6 +66,7 @@ class UserTable extends Component {
             <tbody>
               {customusers.map(customuser => (
                 <tr key={customuser.id}>
+                  <td className="px-4 py-2 border">{customuser.id}</td>
                   <td className="px-4 py-2 border">{customuser.username}</td>
                   {/* <td className="px-4 py-2 border">{this.formatDate(customuser.date_joined)}</td> */}
                   <td className="px-4 py-2 border">{customuser.email}</td>

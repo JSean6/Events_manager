@@ -27,14 +27,36 @@ const Sidebar = () => {
               Events Table
             </Link>
           </li>
-          <li>
+          <li className="dropdown">
             <Link to="/dashboard/vendors" className="sidebar-link">
-              Vendors Table
+              Vendors
             </Link>
+            <ul className="dropdown-list">
+              <li>
+                <Link to="/dashboard/vendors/registration" className="dropdown-item">
+                  Vendor Registration
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/vendors/list" className="dropdown-item">
+                  Vendor List
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/vendors/booking" className="dropdown-item">
+                  Book Vendor
+                </Link>
+              </li>
+            </ul>
           </li>
           <li>
             <Link to="/dashboard/contacts" className="sidebar-link">
               Contacts Table
+            </Link>
+          </li>
+          <li>
+            <Link to="/dashboard/updateuser" className="sidebar-link">
+              Update Users
             </Link>
           </li>
         </ul>

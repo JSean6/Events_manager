@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { PaystackButton } from 'react-paystack';
 import '../App.css';
 
 // Helper function to get the CSRF token from cookies
@@ -36,6 +37,7 @@ const TicketForm = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [receipt, setReceipt] = useState(null);
+  const paymentFormRef = useRef(null); // Use ref to access the form element
 
   const csrfToken = getCookie('csrftoken');
 
@@ -64,39 +66,47 @@ const TicketForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handlePaymentSuccess = (response) => {
+    const receiptData = {
+      ...formData,
+      totalPrice,
+      date: formatDate(new Date())
+    };
+
+    setReceipt(receiptData);
+
     fetch('http://127.0.0.1:8000/api/tickets/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': csrfToken
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(receiptData)
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Form submitted:', data);
-      setReceipt({
-        ...formData,
-        totalPrice,
-        date: formatDate(new Date())
+      .then(response => response.json())
+      .then(data => {
+        console.log('Form submitted:', data);
+        sendEmailReceipt(formData.email);
+        setFormData({
+          title: '',
+          category: '',
+          duration: '',
+          name: '',
+          email: '',
+          number_of_tickets: 1,
+          venue: '',
+          price_of_ticket: ''
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
-      sendEmailReceipt(formData.email);
-      setFormData({
-        title: '',
-        category: '',
-        duration: '',
-        name: '',
-        email: '',
-        number_of_tickets: 1,
-        venue: '',
-        price_of_ticket: ''
-      });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+
+    alert('Payment complete! Reference: ' + response.reference);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   const formatDate = (date) => {
@@ -115,108 +125,125 @@ const TicketForm = () => {
       },
       body: JSON.stringify({ email, receipt })
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Email sent:', data);
-    })
-    .catch(error => {
-      console.error('Error sending email:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Email sent:', data);
+      })
+      .catch(error => {
+        console.error('Error sending email:', error);
+      });
+  };
+
+  const publicKey = "pk_test_3e01e30e25aa7608c084faf58553edc47c96529d"; // Replace with your public key
+
+  const componentProps = {
+    email: formData.email,
+    amount: totalPrice * 100,
+    metadata: {
+      name: formData.name,
+    },
+    publicKey,
+    text: "Pay Now",
+    currency: "KES",
+    onSuccess: handlePaymentSuccess,
+    onClose: () => alert("Payment window closed."),
   };
 
   return (
     <div className="max-w-lg mx-auto mt-10 mb-10">
       <h2 className="text-2xl font-semibold mb-6 text-center">Ticket Form</h2>
-      <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md" id='form'>
+      <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md" id='paymentForm' ref={paymentFormRef}>
         <div className="mb-4">
           <label className="block text-gray-700">Event Title</label>
-          <input 
-            type="text" 
-            name="title" 
-            value={formData.title} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            readOnly 
+            readOnly
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Category</label>
-          <input 
-            type="text" 
-            name="category" 
-            value={formData.category} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            readOnly 
+            readOnly
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Venue</label>
-          <input 
-            type="text" 
-            name="venue" 
-            value={formData.venue} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="venue"
+            value={formData.venue}
+            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            readOnly 
+            readOnly
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Duration</label>
-          <input 
-            type="text" 
-            name="duration" 
-            value={formData.duration} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="duration"
+            value={formData.duration}
+            onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            readOnly 
+            readOnly
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Your Name</label>
-          <input 
-            type="text" 
-            name="name" 
-            value={formData.name} 
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg" 
+            className="w-full px-3 py-2 border rounded-lg"
             required
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Your Email</label>
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            className="w-full px-3 py-2 border rounded-lg" 
+          <input
+            type="email"
+            name="email"
+            id="email-address"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg"
             required
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Number of Tickets</label>
-          <input 
-            type="number" 
-            name="number_of_tickets" 
-            value={formData.number_of_tickets} 
-            onChange={handleChange} 
-            className="w-full px-3 py-2 border rounded-lg" 
+          <input
+            type="number"
+            name="number_of_tickets"
+            value={formData.number_of_tickets}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg"
             min="1"
             required
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Total Price</label>
-          <input 
-            type="number" 
-            name="total_price" 
-            value={totalPrice} 
+          <input
+            type="number"
+            name="total_price"
+            id="amount"
+            value={totalPrice}
             readOnly
-            className="w-full px-3 py-2 border rounded-lg" 
+            className="w-full px-3 py-2 border rounded-lg"
           />
         </div>
-        <button type="submit" id='btn' className="w-full bg-blue-500 text-white py-2 rounded-lg">Submit</button>
+        <PaystackButton className="w-full bg-blue-500 text-white py-2 rounded-lg" {...componentProps} />
       </form>
       {receipt && (
         <div className="mt-6 bg-white p-6 rounded-lg shadow-md mb-10">
@@ -228,7 +255,7 @@ const TicketForm = () => {
           <p><strong>Name:</strong> {receipt.name}</p>
           <p><strong>Email:</strong> {receipt.email}</p>
           <p><strong>Number of Tickets:</strong> {receipt.number_of_tickets}</p>
-          <p><strong>Total Price:</strong> ${receipt.totalPrice}</p>
+          <p><strong>Total Price:</strong> Ksh.{receipt.totalPrice}</p>
           <p><strong>Date:</strong> {receipt.date}</p>
         </div>
       )}

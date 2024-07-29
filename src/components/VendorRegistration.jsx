@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const VendorsForm = () => {
   const [formData, setFormData] = useState({
+    image: null,
     Comapany_name: '',
     service: '',
     working_hours: '',
@@ -32,8 +33,9 @@ const VendorsForm = () => {
       });
       if (response.status === 201) {
         const event = await response.json();
-        console.log('Event created:', event);
+        console.log('Vendor created:', event);
         setFormData({
+          image: null,
           Comapany_name: '',
           service: '',
           rates: '',
@@ -44,7 +46,7 @@ const VendorsForm = () => {
           price_of_ticket: ''
         });
       } else {
-        console.error('Event creation failed');
+        console.error('Vendor creation failed');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -54,9 +56,19 @@ const VendorsForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-8 border border-gray-200 rounded-lg bg-white px-10"
+      className="max-w-lg mx-auto p-8 border border-gray-200 rounded-lg bg-white px-10 my-20"
     >
       <h2 className="text-2xl font-semibold mb-6 text-center">Vendor Registration</h2>
+      <div className="mb-4">
+        <label className="block text-gray-700">Image</label>
+        <input
+          type="file"
+          name="image"
+          onChange={handleChange}
+          required
+          className="w-full p-2 border border-gray-300 rounded mt-1 "
+        />
+      </div>
       <div className="mb-4">
         <label className="block text-gray-700">Company Name</label>
         <input

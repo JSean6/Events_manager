@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import RegisterForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import Eventpage from "./components/Eventpage";
-import FetchedEvents from "./components/FetchedEvents";
+import EventForm from "./components/Eventform";
 import TicketForm from "./components/Ticketform";
 import FetchedEventsWithTickets from "./components/Eventavailability";
 import FetchedEventsWithIncome from "./components/IncomeGenerated";
@@ -21,10 +21,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/context/AuthContext";
 import EventCharts from "./components/EventCharts";
 import ContactsTable from "./components/FetchedContacts";
+import UpdateUserForm from "./components/UserUpdate";
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/dashboard/events", "/dashboard/contacts", "/dashboard/vendors"];
+  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/dashboard/events", "/dashboard/contacts", "/dashboard/vendors", "dashboard/eventform", "/dashboard/updateuser"];
 
   return (
     <>
@@ -100,6 +101,8 @@ const App = () => {
             <Route path="/dashboard/events" element={<EventTable />}/>
             <Route path="/dashboard/vendors" element={<VendorTable />}/>
             <Route path="/dashboard/contacts" element={<ContactsTable />}/>
+            <Route path="/dashboard/eventform" element={<EventForm />}/>
+            <Route path="/dashboard/updateuser" element={<UpdateUserForm />}/>
             <Route path="/contact" element={<ContactForm />}/>
           </Routes>
         </Layout>

@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/" className='flex items-center'>
+      <Link to="/" className=''>
         <img src={logo} alt="Logo" />
       </Link>
       <div className="hamburger" onClick={handleToggle}>
@@ -35,7 +35,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/contact" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-            Contact
+            Contact Us
           </Link>
         </li>
         <li className="relative dropdown">
