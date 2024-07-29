@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
+import { eventsAPI } from '../config'; 
 
 class EventTable extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class EventTable extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/events/")
+    fetch(eventsAPI)
       .then(res => res.json())
       .then(
         (result) => {

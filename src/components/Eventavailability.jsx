@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaPerson } from "react-icons/fa6";
 import './Styles.css';
 import axiosInstance from './Axios';
+import { baseURL, eventsAPI, ticketsAPI } from '../config'; 
+
 
 class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
@@ -17,8 +19,8 @@ class FetchedEventsWithTickets extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch("http://127.0.0.1:8000/api/events/").then(res => res.json()),
-      fetch("http://127.0.0.1:8000/api/tickets/").then(res => res.json())
+      fetch(eventsAPI).then(res => res.json()),
+      fetch(ticketsAPI).then(res => res.json())
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -70,7 +72,6 @@ class FetchedEventsWithTickets extends React.Component {
     } else if (!isLoaded) {
       return <div className="text-center text-gray-700 mt-4">Loading...</div>;
     } else {
-      const baseURL = "https://res.cloudinary.com/da1fegzlm/";
       return (
         <div className="max-w-6xl mx-auto mt-10">
           <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Trending In Kenya</h2>

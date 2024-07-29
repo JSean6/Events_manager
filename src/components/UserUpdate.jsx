@@ -25,7 +25,7 @@ const UpdateUserForm = () => {
 
     try {
       // Sends a PUT request to update user details
-      const response = await axios.put(`http://127.0.0.1:8000/api/users/${formData.userId}/`, {
+      const response = await axios.put(`https://event-manager-backend-2xpo.onrender.com/api/users/${formData.userId}/`, {
         username: formData.username,
         email: formData.email,
         password: formData.password, // Include password in the request body

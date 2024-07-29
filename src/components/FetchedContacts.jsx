@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
+import { contactsAPI } from '../config'; 
+
 
 class ContactsTable extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class ContactsTable extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/contacts/")
+    fetch(contactsAPI)
       .then(res => res.json())
       .then(
         (result) => {

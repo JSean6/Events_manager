@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { vendorsAPI } from '../config';
 
 const VendorsForm = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const VendorsForm = () => {
       data.append(key, formData[key]);
     }
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/vendors/', {
+      const response = await fetch(vendorsAPI, {
         method: 'POST',
         body: data,
       });

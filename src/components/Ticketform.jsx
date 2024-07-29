@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PaystackButton } from 'react-paystack';
 import '../App.css';
+import { ticketsAPI } from '../config'; 
+
 
 // Helper function to get the CSRF token from cookies
 function getCookie(name) {
@@ -75,7 +77,7 @@ const TicketForm = () => {
 
     setReceipt(receiptData);
 
-    fetch('http://127.0.0.1:8000/api/tickets/', {
+    fetch(ticketsAPI, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

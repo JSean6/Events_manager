@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EventForm from './Eventform';
+import { eventsAPI } from '../config'; 
+
 
 const Eventpage = () => {
   const [events, setEvents] = useState([]);
@@ -7,7 +9,7 @@ const Eventpage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/events');
+        const response = await fetch(eventsAPI);
         if (response.ok) {
           const data = await response.json();
           setEvents(data);

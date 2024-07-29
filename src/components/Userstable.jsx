@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { parseISO, format } from 'date-fns';
+import { usersAPI } from '../config';
 
 class UserTable extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class UserTable extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/users/") 
+    fetch(usersAPI) 
       .then(res => res.json())
       .then(
         (result) => {

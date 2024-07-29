@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles.css';
+import { baseURL, eventsAPI, ticketsAPI } from '../config'; 
 
 class FetchedEventsWithIncome extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class FetchedEventsWithIncome extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch("http://127.0.0.1:8000/api/events/").then(res => res.json()),
-      fetch("http://127.0.0.1:8000/api/tickets/").then(res => res.json())
+      fetch(eventsAPI).then(res => res.json()),
+      fetch(ticketsAPI).then(res => res.json())
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -66,7 +67,6 @@ class FetchedEventsWithIncome extends React.Component {
     } else if (!isLoaded) {
       return <div className="text-center text-gray-700 mt-4">Loading...</div>;
     } else {
-      const baseURL = "https://res.cloudinary.com/da1fegzlm/";
       return (
         <section>
 

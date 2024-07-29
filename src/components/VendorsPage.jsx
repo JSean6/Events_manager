@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { vendorsAPI } from '../config'; 
 
 class FetchVendors extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class FetchVendors extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/vendors/")
+    fetch(vendorsAPI)
       .then(res => res.json())
       .then(
         (result) => {

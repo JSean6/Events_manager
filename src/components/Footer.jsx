@@ -6,7 +6,7 @@ import logoPlaceholder from '/src/assets/logo.png';
 const Footer = () => {
   const styles = {
     footer: {
-      backgroundColor: 'rgba(28, 48, 103, 0.8)', // Platinum color background
+      backgroundColor: 'rgba(28, 48, 103, 0.8)', 
       color: '#fff',
       padding: '40px 20px',
       display: 'flex',

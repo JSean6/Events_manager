@@ -94,7 +94,7 @@ const Navbar = () => {
         </li>
         {auth ? (
           <li className='nav-links'>
-            <button onClick={logout} className=''>
+            <button onClick={logout} className='logout'>
               Logout
             </button>
           </li>

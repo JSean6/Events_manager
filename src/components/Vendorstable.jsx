@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
+import { vendorsAPI } from '../config'; 
+
 
 class VendorTable extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class VendorTable extends Component {
   }
 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/vendors/")
+    fetch(vendorsAPI)
       .then(res => res.json())
       .then(
         (result) => {

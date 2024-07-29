@@ -1,6 +1,6 @@
-// src/VendorBookingForm.js
-
 import React, { useState } from 'react';
+import { vendorsAPI } from '../config'; 
+
 
 const VendorBookingForm = () => {
   const [formData, setFormData] = useState({

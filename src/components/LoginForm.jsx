@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
+import { loginAPI, csrfAPI } from '../config'; 
+
 
 const LoginForm = () => {
   const location = useLocation();
@@ -30,7 +32,7 @@ const LoginForm = () => {
 
   const fetchCSRFToken = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/csrf-token/');
+      const response = await axios.get(csrfAPI);
       axios.defaults.headers.post['X-CSRFToken'] = response.data.csrfToken;
     } catch (error) {
       console.error('Error fetching CSRF token:', error);
@@ -44,7 +46,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+      const response = await axios.post(loginAPI, {
         email: formData.email,
         password: formData.password,
       });
