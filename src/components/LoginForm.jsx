@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
-import { loginAPI, csrfAPI } from '../config'; 
+import { loginAPI, csrfAPI } from '../../config'; 
 
 
 const LoginForm = () => {

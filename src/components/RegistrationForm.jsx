@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles.css';
-import { usersAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
 
 
 const RegisterForm = () => {
@@ -9,7 +9,7 @@ const RegisterForm = () => {
     username: '',
     email: '',
     password: '',
-    role: 'user', // Autofill role with 'user'
+    role: 'user', 
   });
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(usersAPI, {
+      const response = await fetch(`${BaseURL}api/users/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,11 +33,11 @@ const RegisterForm = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) { // Corrected response.OK to response.ok
+      if (response.ok) { 
         // If registration is successful, redirect to the login form
         navigate(`/login?email=${formData.email}`);
       } else {
-        // Handle errors (e.g., display error messages)
+        // Handle errors 
         console.error('Registration failed');
       }
     } catch (error) {

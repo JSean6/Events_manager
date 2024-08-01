@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { vendorsAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
 
 
 const VendorBookingForm = () => {

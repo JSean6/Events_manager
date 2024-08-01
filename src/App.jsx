@@ -22,6 +22,7 @@ import { AuthProvider } from "./components/context/AuthContext";
 import EventCharts from "./components/EventCharts";
 import ContactsTable from "./components/FetchedContacts";
 import UpdateUserForm from "./components/UserUpdate";
+import Services from "./components/Services";
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -91,6 +92,7 @@ const App = () => {
               } 
             />
             <Route path="" element={<Home />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/register" element={<RegisterForm />}/>
             <Route path="/login" element={<LoginForm />}/>
             <Route path="/vendorsform" element={<VendorsForm />}/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
-import { vendorsAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
 
 
 class VendorTable extends Component {
@@ -14,7 +14,7 @@ class VendorTable extends Component {
   }
 
   componentDidMount() {
-    fetch(vendorsAPI)
+    fetch(`${BaseURL}api/vendors/`)
       .then(res => res.json())
       .then(
         (result) => {

@@ -102,10 +102,8 @@ body {
 }
 
 .event-card {
-  background-color: #B3A394; 
   color: #fff;
   border: 1px solid #444;
-  max-height: max-content; 
 }
 
 .event-card img:hover {
@@ -114,7 +112,7 @@ body {
 
 .event-card img {
   width: 100%;
-  height: 238px;
+  height: 250px;
   object-fit: cover; 
 }
 
@@ -248,8 +246,7 @@ body {
 
 .event-card {
   position: relative;
-  background-color: #B3A394;
-  color: #fff;
+  color: #12386a;
   border: 1px solid #444;
 }
 

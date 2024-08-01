@@ -29,13 +29,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/about" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
-            Contact Us
+          <Link to="/services" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+            Services
           </Link>
         </li>
         <li className="relative dropdown">
@@ -91,6 +86,11 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+        </li>
+        <li>
+          <Link to="/contact" className='transition duration-300 ease-in-out font-bold px-4 py-2 rounded'>
+            Contact Us
+          </Link>
         </li>
         {auth ? (
           <li className='nav-links'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { vendorsAPI } from '../config'; 
+import { BaseURL, cloudinaryURL } from '../../config'; 
 
 class FetchVendors extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class FetchVendors extends React.Component {
   }
 
   componentDidMount() {
-    fetch(vendorsAPI)
+    fetch(`${BaseURL}api/vendors/`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -39,13 +39,12 @@ class FetchVendors extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      const baseURL = "https://res.cloudinary.com/da1fegzlm/";
       return (
         <div className="max-w-lg mx-auto mt-10">
           <h2 className="text-2xl font-semibold mb-6 text-center">Vendors List</h2>
           {vendors.map(vendor => (
             <div key={vendor.id} className="p-4 border border-gray-500 rounded-lg mb-4 bg-white">
-              <img src={`${baseURL}${vendor.image}`} alt={vendor.title} className="w-full h-auto mb-4" />
+              <img src={`${cloudinaryURL}${vendor.image}`} alt={vendor.title} className="w-full h-auto mb-4" />
               <h3 className="text-xl mt-2 text-gray-700 font-semibold">{vendor.title}</h3>
               <h3 className="mt-2 text-gray-700">Comapany_name: {vendor.Comapany_name}</h3>
               <h3 className="mt-2 text-gray-700">Service: {vendor.service}</h3>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles.css';
-import { baseURL, eventsAPI, ticketsAPI } from '../config'; 
+import { cloudinaryURL, BaseURL } from '../../config'; 
 
 class FetchedEventsWithIncome extends React.Component {
   constructor(props) {
@@ -16,8 +16,8 @@ class FetchedEventsWithIncome extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(eventsAPI).then(res => res.json()),
-      fetch(ticketsAPI).then(res => res.json())
+      fetch(`${BaseURL}api/events/`).then(res => res.json()),
+      fetch(`${BaseURL}api/tickets/`).then(res => res.json())
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -73,10 +73,10 @@ class FetchedEventsWithIncome extends React.Component {
         <div >
           <div className="max-w-6xl mx-auto mt-10">
             <h2 className="text-4xl font-semibold mb-10 text-center">Event List</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-20 mx-20">
               {events.map(event => (
-                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden mx-6 my-4 mx-16">
-                  <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
+                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden my-4 mx-16">
+                  <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold mb-2">{event.title}</h3>
                     {/* <p className="mb-4">{event.description}</p> */}

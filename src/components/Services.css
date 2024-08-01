@@ -1,0 +1,51 @@
+.services-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .service {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 80%;
+  }
+  
+  .service:nth-child(odd) .service-content {
+    order: 2;
+  }
+  
+  .service-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .service-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .service-description {
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  .service-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .service-image img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  

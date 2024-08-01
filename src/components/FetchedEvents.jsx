@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { baseURL, eventsAPI, ticketsAPI } from '../config'; 
+import { cloudinaryURL, BaseURL } from '../../config'; 
 import './Styles.css';
 
 class FetchedEvents extends React.Component {
@@ -16,8 +16,8 @@ class FetchedEvents extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(eventsAPI).then(res => res.json()),
-      fetch(ticketsAPI).then(res => res.json())
+      fetch(`${BaseURL}api/events/`).then(res => res.json()),
+      fetch(`${BaseURL}api/tickets/`).then(res => res.json())
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -66,13 +66,13 @@ class FetchedEvents extends React.Component {
       return (
         <div className="max-w-6xl mx-auto mt-10">
           <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Trending In Kenya</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20 mx-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-20 mx-16">
             {events.map(event => {
               const availableTickets = this.getAvailableTicketsForEvent(event);
               return (
                 <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
                   <div className="relative h-48 overflow-hidden">
-                    <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-full object-cover"/>
+                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-full object-cover"/>
                     <span className={`availability-badge ${availableTickets > 0 ? 'bg-green-500' : 'bg-red-500'}`}>
                       {availableTickets > 0 ? 'Available' : 'SOLD OUT'}
                     </span>

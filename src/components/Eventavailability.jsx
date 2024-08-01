@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaPerson } from "react-icons/fa6";
 import './Styles.css';
 import axiosInstance from './Axios';
-import { baseURL, eventsAPI, ticketsAPI } from '../config'; 
+import { cloudinaryURL, BaseURL } from '../../config'; 
 
 
 class FetchedEventsWithTickets extends React.Component {
@@ -19,8 +19,8 @@ class FetchedEventsWithTickets extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(eventsAPI).then(res => res.json()),
-      fetch(ticketsAPI).then(res => res.json())
+      fetch(`${BaseURL}api/events/`).then(res => res.json()),
+      fetch(`${BaseURL}api/tickets/`).then(res => res.json())
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -79,15 +79,15 @@ class FetchedEventsWithTickets extends React.Component {
             {events.map(event => {
               const availableTickets = this.getAvailableTicketsForEvent(event);
               return (
-                <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white mx-20">
+                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden my-4 mx-16">
                   <div className="relative h-64 overflow-hidden">
-                    <img src={`${baseURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
+                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
                     <span className={`availability-badge ${availableTickets > 0 ? 'bg-green-500' : 'bg-red-500'}`}>
                       {availableTickets > 0 ? 'Available' : 'SOLD OUT'}
                     </span>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-2">{event.title} ({event.category})</h3>
+                    <h3 className="text-2xl font-semibold mb-2">{event.title} ({event.category})</h3>
                     <p className="text-gray-600 mb-4">{event.description}</p>
                     <p className="text-gray-700 mb-1"><span className="font-semibold">Venue:</span> {event.venue}</p>
                     <p className="text-gray-700 mb-1"><span className="font-semibold">Start Date:</span> {event.startDate}</p>

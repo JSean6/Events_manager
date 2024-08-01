@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
-import { contactsAPI } from '../config'; 
+import { contactsAPI } from '../../config'; 
 
 
 class ContactsTable extends Component {

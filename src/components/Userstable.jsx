@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { parseISO, format } from 'date-fns';
-import { usersAPI } from '../config';
+import { BaseURL } from '../../config';
 
 class UserTable extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class UserTable extends Component {
   }
 
   componentDidMount() {
-    fetch(usersAPI) 
+    fetch(`${BaseURL}api/users/`) 
       .then(res => res.json())
       .then(
         (result) => {

@@ -2,17 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PaystackButton } from 'react-paystack';
 import '../App.css';
-import { ticketsAPI } from '../config'; 
+import { BaseURL } from '../../config';
 
-
-// Helper function to get the CSRF token from cookies
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
       if (cookie.substring(0, name.length + 1) === (name + '=')) {
         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
         break;
@@ -77,32 +74,40 @@ const TicketForm = () => {
 
     setReceipt(receiptData);
 
-    fetch(ticketsAPI, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken
-      },
-      body: JSON.stringify(receiptData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Form submitted:', data);
-        sendEmailReceipt(formData.email);
-        setFormData({
-          title: '',
-          category: '',
-          duration: '',
-          name: '',
-          email: '',
-          number_of_tickets: 1,
-          venue: '',
-          price_of_ticket: ''
-        });
+    const postData = (url, data) => {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data)
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log(`Form submitted to ${url}:`, data);
+          if (url === `${BaseURL}api/send-receipt-email/`) {
+            sendEmailReceipt(formData.email, receiptData);
+          }
+        })
+        .catch(error => {
+          console.error(`Error submitting to ${url}:`, error);
+        });
+    };
+
+    postData(`${BaseURL}save-transaction/`, receiptData);
+    postData(`${BaseURL}api/tickets/`, receiptData);
+
+    setFormData({
+      title: '',
+      category: '',
+      duration: '',
+      name: '',
+      email: '',
+      number_of_tickets: 1,
+      venue: '',
+      price_of_ticket: ''
+    });
 
     alert('Payment complete! Reference: ' + response.reference);
   };
@@ -118,8 +123,8 @@ const TicketForm = () => {
     return `${year}-${month}-${day}`;
   };
 
-  const sendEmailReceipt = (email) => {
-    fetch('http://127.0.0.1:8000/api/send-receipt/', {
+  const sendEmailReceipt = (email, receipt) => {
+    fetch(`${BaseURL}api/send-receipt-email/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -140,7 +145,7 @@ const TicketForm = () => {
 
   const componentProps = {
     email: formData.email,
-    amount: totalPrice * 100,
+    amount: totalPrice * 100, // Convert to smallest currency unit
     metadata: {
       name: formData.name,
     },

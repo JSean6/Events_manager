@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { eventsAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
 
 const EventForm = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const EventForm = () => {
       data.append(key, formData[key]);
     }
     try {
-      const response = await fetch(eventsAPI, {
+      const response = await fetch(`${BaseURL}api/events/`, {
         method: 'POST',
         body: data,
       });

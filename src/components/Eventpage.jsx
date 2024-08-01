@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EventForm from './Eventform';
-import { eventsAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
 
 
 const Eventpage = () => {
@@ -9,7 +9,7 @@ const Eventpage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(eventsAPI);
+        const response = await fetch(`${BaseURL}api/events/`);
         if (response.ok) {
           const data = await response.json();
           setEvents(data);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
-import { eventsAPI } from '../config'; 
+import { BaseURL } from '../../config'; 
+import axiosInstance from './axiosInstance';
 
 class EventTable extends Component {
   constructor(props) {
@@ -13,7 +14,11 @@ class EventTable extends Component {
   }
 
   componentDidMount() {
-    fetch(eventsAPI)
+    this.fetchEvents();
+  }
+  
+  fetchEvents = () => {
+    fetch(`${BaseURL}api/events/`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -29,6 +34,25 @@ class EventTable extends Component {
           });
         }
       )
+  }
+
+  deleteEvent = async (eventId) => {
+    try {
+      const response = await axiosInstance.delete(`${BaseURL}api/events/${eventId}/`);
+      console.log('Event deleted:', response.data);
+      this.fetchEvents();
+    } catch (error) {
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+        console.error('Error headers:', error.response.headers);
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+      console.error('Error config:', error.config);
+    }
   }
 
   render() {
@@ -55,6 +79,7 @@ class EventTable extends Component {
                 <th className="px-4 py-2 border">End Date</th>
                 <th className="px-4 py-2 border">Tickets</th>
                 <th className="px-4 py-2 border">Ticket Price</th>
+                <th className="px-4 py-2 border">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +92,14 @@ class EventTable extends Component {
                   <td className="px-4 py-2 border">{event.endDate}</td>
                   <td className="px-4 py-2 border">{event.tickets}</td>
                   <td className="px-4 py-2 border">{event.price_of_ticket}</td>
+                  <td className="px-4 py-2 border">
+                    <button
+                      onClick={() => this.deleteEvent(event.id)}
+                      className="px-4 py-2 bg-red-500 text-white rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
