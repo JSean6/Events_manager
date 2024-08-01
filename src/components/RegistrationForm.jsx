@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles.css';
-import { BaseURL } from '../../config'; 
+import { BaseURL } from '../../config';
 
 
 const RegisterForm = () => {
