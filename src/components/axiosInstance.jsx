@@ -1,4 +1,6 @@
+// Axios.js
 import axios from 'axios';
+import { BaseURL } from '../../config'; 
 
 function getCookie(name) {
   let cookieValue = null;
@@ -18,10 +20,12 @@ function getCookie(name) {
 const csrfToken = getCookie('csrftoken');
 
 const axiosInstance = axios.create({
+  baseURL: BaseURL, 
   headers: {
     'X-CSRFToken': csrfToken,
     'Content-Type': 'application/json',
   },
+  timeout: 10000, 
 });
 
 export default axiosInstance;

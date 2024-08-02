@@ -23,17 +23,33 @@ import EventCharts from "./components/EventCharts";
 import ContactsTable from "./components/FetchedContacts";
 import UpdateUserForm from "./components/UserUpdate";
 import Services from "./components/Services";
+import './App.css'; 
 
 const Layout = ({ children }) => {
   const location = useLocation();
   const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/dashboard/events", "/dashboard/contacts", "/dashboard/vendors", "dashboard/eventform", "/dashboard/updateuser"];
 
+  let backgroundClass = '';
+  switch (location.pathname) {
+    case '/contact':
+      backgroundClass = 'contact-background';
+      break;
+    case '/services':
+      backgroundClass = 'services-background';
+      break;
+    // case '/login':
+    //   backgroundClass = 'contact-background';
+    //   break;
+    default:
+      backgroundClass = 'default-background';
+  }
+
   return (
-    <>
+    <div className={backgroundClass}>
       {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
       {children}
       {!hideNavbarRoutes.includes(location.pathname) && <Footer />}
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { contactsAPI } from '../../config';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState({
@@ -17,12 +18,29 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch(contactsAPI, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formState)
+      });
+      if (response.ok) {
+        setResponseMessage('Thank you for contacting us! We will get back to you shortly.');
+        setFormState({ name: '', email: '', message: '' });
+      } else {
+        setResponseMessage('Something went wrong. Please try again later.');
+      }
+    } catch (error) {
+      setResponseMessage('An error occurred. Please try again later.');
+    }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg my-10" >
-      <h2 className="text-3xl font-semibold mb-6 text-center ">Contact Us</h2>
-      <form onSubmit={handleSubmit} action="post" className="space-y-6">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg my-10">
+      <h2 className="text-3xl font-semibold mb-6 text-center">Contact Us</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label htmlFor="name" className="block">Name</label>
           <input
@@ -62,7 +80,6 @@ const ContactForm = () => {
         <button
           type="submit"
           className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700"
-          id='btn'
         >
           Send
         </button>

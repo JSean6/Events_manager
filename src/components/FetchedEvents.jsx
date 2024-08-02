@@ -61,30 +61,28 @@ class FetchedEvents extends React.Component {
     if (error) {
       return <div className="text-center text-red-600 mt-4">Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div className="text-center text-gray-700 mt-4">Loading...</div>;
+      return <div className="text-center mt-4">Loading...</div>;
     } else {
       return (
         <div className="max-w-6xl mx-auto mt-10">
-          <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Trending In Kenya</h2>
+          <h2 className="text-4xl font-semibold text-center mb-10">Trending In Kenya</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-20 mx-16">
             {events.map(event => {
               const availableTickets = this.getAvailableTicketsForEvent(event);
               return (
-                <div key={event.id} className="event-card border border-gray-200 rounded-lg shadow-lg overflow-hidden bg-white">
-                  <div className="relative h-48 overflow-hidden">
-                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-full object-cover"/>
+                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden">
+                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-50 object-cover"/>
                     <span className={`availability-badge ${availableTickets > 0 ? 'bg-green-500' : 'bg-red-500'}`}>
                       {availableTickets > 0 ? 'Available' : 'SOLD OUT'}
                     </span>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{event.title} ({event.category})</h3>
-                    <p className="text-gray-600 mb-2">{event.description}</p>
-                    <strong><p className="text-gray-700 mb-1">{event.venue}</p></strong>
-                    <strong><p className="text-gray-700 mb-1">{this.formatDate(event.startDate)}</p></strong>
-                    <strong><p className="text-gray-700 mb-1">Starts: {event.time}</p></strong>
-                    <strong><p className="text-gray-700 mb-1">{event.duration}</p></strong>
-                    <strong><p className="text-gray-700 mb-1">Ksh. {event.price_of_ticket}</p></strong>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold">{event.title} ({event.category})</h3>
+                    <p className="mb-2">{event.description}</p>
+                    <strong><p className="font-semibold">{event.venue}</p></strong>
+                    <strong><p className="font-semibold">{this.formatDate(event.startDate)}</p></strong>
+                    <strong><p className="font-semibold">Starts: {event.time}</p></strong>
+                    <strong><p className="font-semibold">{event.duration}</p></strong>
+                    <strong><p className="font-semibold">Ksh. {event.price_of_ticket}</p></strong>
                     <br />
                     <button
                       onClick={() => handleMoreInfo(event.title, event.category, event.venue, `From: ${event.startDate} To: ${event.endDate}`, event.price_of_ticket)}

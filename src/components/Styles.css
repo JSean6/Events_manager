@@ -7,10 +7,6 @@ body {
   font-size: 16px;
 }
 
-.event-card {
-  font-family: 'Helvetica Neue', sans-serif;
-}
-
 .text-center {
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -20,7 +16,7 @@ body {
   position: sticky;
   top: 0;
   background-color: rgba(28, 48, 103, 0.8); 
-  backdrop-filter: blur(8px); /* Blur effect */
+  backdrop-filter: blur(8px); 
   z-index: 1000;
   height: 90px;
   display: flex;
@@ -99,11 +95,6 @@ body {
   padding: 10px 20px;
   width: 100%;
   text-align: left;
-}
-
-.event-card {
-  color: #fff;
-  border: 1px solid #444;
 }
 
 .event-card img:hover {
@@ -211,6 +202,7 @@ body {
     margin-left: 20px;
   }
 }
+
 @media (max-width: 768px) {
   #contactform {
     margin-right: 20px;
@@ -232,19 +224,14 @@ body {
   background-color: #12386a;
 }
 
-#loginform {
-  background-color: #F87060; 
-  color: #fff;
-  border: 1px solid #444; /* Border color */
-}
-
 #contactform {
-  background-color: #F87060; 
+  background-color: #B3A394; 
   color: #fff;
-  border: 1px solid #444; /* Border color */
+  border: 1px solid #444; 
 }
 
 .event-card {
+  font-family: 'Helvetica Neue', sans-serif;
   position: relative;
   color: #12386a;
   border: 1px solid #444;

@@ -73,9 +73,9 @@ class FetchedEventsWithIncome extends React.Component {
         <div >
           <div className="max-w-6xl mx-auto mt-10">
             <h2 className="text-4xl font-semibold mb-10 text-center">Event List</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-20 mx-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-20 mx-20">
               {events.map(event => (
-                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden my-4 mx-16">
+                <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden">
                   <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold mb-2">{event.title}</h3>

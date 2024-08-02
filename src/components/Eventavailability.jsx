@@ -3,8 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { FaPerson } from "react-icons/fa6";
 import './Styles.css';
 import axiosInstance from './Axios';
-import { cloudinaryURL, BaseURL } from '../../config'; 
+import { cloudinaryURL } from '../../config'; 
 
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 
 class FetchedEventsWithTickets extends React.Component {
   constructor(props) {
@@ -19,8 +33,8 @@ class FetchedEventsWithTickets extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`${BaseURL}api/events/`).then(res => res.json()),
-      fetch(`${BaseURL}api/tickets/`).then(res => res.json())
+      axiosInstance.get('https://event-manager-backend-2xpo.onrender.com/api/events/').then(res => res.data),
+      axiosInstance.get('https://event-manager-backend-2xpo.onrender.com/api/tickets/').then(res => res.data)
     ]).then(
       ([events, tickets]) => {
         this.setState({
@@ -39,12 +53,20 @@ class FetchedEventsWithTickets extends React.Component {
   }
 
   handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this type?')) {
+    if (window.confirm('Are you sure you want to delete this event?')) {
+      const csrfToken = getCookie('csrftoken');
       try {
-        await axiosInstance.delete(`/events/${id}/`);
-        this.fetchType();
+        await axiosInstance.delete(`https://event-manager-backend-2xpo.onrender.com/api/events/${id}/`, {
+          headers: {
+            'X-CSRFToken': csrfToken
+          }
+        });
+        this.setState((prevState) => ({
+          events: prevState.events.filter(event => event.id !== id)
+        }));
       } catch (error) {
-        console.error("Error deleting type:", error);
+        console.error("Error deleting event:", error);
+        this.setState({ error });
       }
     }
   };
@@ -75,13 +97,13 @@ class FetchedEventsWithTickets extends React.Component {
       return (
         <div className="max-w-6xl mx-auto mt-10">
           <h2 className="text-4xl font-semibold mb-10 text-center text-gray-800">Trending In Kenya</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20 mx-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-20 mx-16">
             {events.map(event => {
               const availableTickets = this.getAvailableTicketsForEvent(event);
               return (
                 <div key={event.id} className="event-card rounded-lg shadow-lg overflow-hidden my-4 mx-16">
                   <div className="relative h-64 overflow-hidden">
-                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-48 object-cover" />
+                    <img src={`${cloudinaryURL}${event.image}`} alt={event.title} className="w-full h-64 object-cover" />
                     <span className={`availability-badge ${availableTickets > 0 ? 'bg-green-500' : 'bg-red-500'}`}>
                       {availableTickets > 0 ? 'Available' : 'SOLD OUT'}
                     </span>
@@ -97,8 +119,7 @@ class FetchedEventsWithTickets extends React.Component {
                     <p className="text-gray-700 mb-1"><span className="font-semibold">Ticket Price:</span> {event.price_of_ticket}</p>
                     <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Booked <FaPerson />:</span> {this.getTicketsCountForEvent(event.title)}</p>
                     <p className="text-gray-700 mb-1"><span className="font-semibold">Tickets Available:</span> {availableTickets}</p>
-                    {/* <button onClick={() => handleEdit(p)} className="px-4 py-2 text-blue-600 rounded ">Edit</button> */}
-                    <button onClick={() => this.handleDelete(event.id)} className="px-4 py-2 ms-2 text-red-600 rounded ">Delete</button>
+                    <button onClick={() => this.handleDelete(event.id)} className="px-4 py-2 ms-2 text-red-600 rounded mx-10">Delete</button>
                     <button
                       onClick={() => handleMoreInfo(event.title, event.category, event.venue, `From: ${event.startDate} To: ${event.endDate}`, event.price_of_ticket)}
                       className="mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-navy-blue-700"
