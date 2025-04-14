@@ -1,41 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import EventForm from './Eventform';
-import { BaseURL } from '../../config'; 
+import React, { useState } from "react";
+import FilterSidebar from "./Sidebar2"; // Importing Sidebar2 as FilterSidebar
+import FetchedEvents from "./FetchedEvents";
+import "./FetchedEvents.css"; // Optional styling for layout
 
+function Home() {
+  const [filters, setFilters] = useState({}); // State to track applied filters
 
-const Eventpage = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(`${BaseURL}api/events/`);
-        if (response.ok) {
-          const data = await response.json();
-          setEvents(data);
-        } else {
-          console.error('Failed to fetch events');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  const handleAddEvent = (newEvent) => {
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
+  // Callback function to handle filter updates
+  const handleFilter = (newFilters) => {
+    setFilters(newFilters);
   };
 
   return (
     <section>
-    <div className="p-8">
-      <h1 className="text-3xl font-semibold mb-8 text-center">Event Manager</h1>
-      <EventForm onAddEvent={handleAddEvent} />
+    <div className="home-container">
+      <FilterSidebar onFilter={handleFilter} />
+      <div className="content-container">
+        <FetchedEvents filters={filters} />
+      </div>
     </div>
     </section>
   );
-};
+}
 
-export default Eventpage;
+export default Home;
